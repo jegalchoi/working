@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.destroy_all
+ApplicationRecord.connection.reset_pk_sequence!('users')
+10.times do
+  User.create!(username: Faker::Name.unique.name, email: Faker::Internet.email, password: "password")
+end

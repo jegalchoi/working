@@ -1,0 +1,30 @@
+<% if action == :edit %>
+  <% action_url = user_url(user) %>
+<% else %>
+  <% action_url = users_url %>
+<% end %>
+
+<form action="<%= action_url %>" method="POST">
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+  <%= auth_token %>
+
+  <label for="user_username">Username:</label>
+  <input type="text" id="user_username" name="user[username]" value="<%= @user.username %>">
+  <br>
+
+  <label for="user_email">Email:</label>
+  <input type="email" id="user_email" name="user[email]" value="<%= @user.email %>">
+  <br>
+
+  <label for="user_password">Password:</label>
+  <input type="password" id="user_password" name="user[password]" value="<%= @user.password %>">
+  <br>
+
+  <input type="submit" value="<%= (action == :edit) ? 'Edit' : 'Submit' %>">
+</form>
+
+<h2><a href="<%= users_url %>">List of Workers</a></h2>
+
+

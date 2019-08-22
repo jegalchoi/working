@@ -28,10 +28,26 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
 
     if @user
-      render user_url(@user)
+      render :show
+    else
+      redirect_to users_url
+    end
+  end
+
+  def edit
+    @user = User.find_by(id: params[:id])
+
+    render :edit
+  end
+
+  def update
+    @user = User.find_by(id: params[:id])
+
+    if @user.update_attributes(user_params)
+      redirect_to user_url(@user)
     else
       flash.now[:errors] = @user.errors.full_messages
-      redirect_to :index
+      render :edit
     end
   end
 

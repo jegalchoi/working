@@ -25,6 +25,6 @@
   <input type="submit" value="<%= (action == :edit) ? 'Edit' : 'Submit' %>">
 </form>
 
-<h2><a href="<%= users_url %>">List of Workers</a></h2>
+<h2><%= link_to 'List of Workers', users_url %></h2>
 
 

@@ -8,8 +8,29 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    <nav class="main-nav">
+      <h1><%= link_to 'Working', users_url %></h1>
+      <div>
+        <% if current_user.nil? %>
+          <%= link_to 'Sign Up', new_user_url %>
+          <%= link_to 'Sign In', new_session_url %>
+        <% else %>
+          <%= current_user.username %>
+          <form action="<%= session_url %>" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <%= auth_token %>
+            <input type="submit" value="Sign Out">
+          </form>
+        <% end %>
+      </div>
+    </nav>
+    <main>
     <%= yield %>
+    </main>
+    
   </body>
+  <footer>
+    <h6>We are a work in progress.</h6>    
+  </footer>
 </html>

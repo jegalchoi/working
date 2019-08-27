@@ -1,15 +1,12 @@
 class UsersController < ApplicationController
+  before_action :find_user, only: [:show, :edit, :destroy]
 
   def index
     @users = User.all
-
-    render :index
   end
 
   def new
     @user = User.new
-
-    render :new
   end
 
   def create
@@ -25,24 +22,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id])
-
     if @user
-      render :show
     else
       redirect_to users_url
     end
   end
 
   def edit
-    @user = User.find_by(id: params[:id])
-
-    render :edit
   end
 
   def update
-    @user = User.find_by(id: params[:id])
-
     if @user.update_attributes(user_params)
       redirect_to user_url(@user)
     else
@@ -55,5 +44,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def find_user
+    @user = User.find_by(id: params[:id])
   end
 end

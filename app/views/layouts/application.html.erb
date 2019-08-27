@@ -26,11 +26,13 @@
       </div>
     </nav>
     <main>
-    <%= yield %>
+      <% flash.each do |key, value| %>
+        <div class="flash"><%= value %></div> 
+      <% end %>
+      <%= yield %>
     </main>
-    
+    <footer>
+      <h6>We are a work in progress.</h6>    
+    </footer>
   </body>
-  <footer>
-    <h6>We are a work in progress.</h6>    
-  </footer>
 </html>
